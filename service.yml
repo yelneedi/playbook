@@ -2,6 +2,7 @@
   become_method: yes
   connection: ssh
   gather_facts: no
+  remote_user: ansible
   tasks:
    - name: install tomcat
      action: yum name=elinks state=installed
