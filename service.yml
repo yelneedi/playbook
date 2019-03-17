@@ -1,0 +1,9 @@
+- hosts: webserver
+  sudo: yes
+  connection: ssh
+  gather_facts: no
+  tasks:
+   - name: install tomcat
+     action: yum name=elinks state=installed
+   - name: start tomact services
+     action: service name=elinks state=started
