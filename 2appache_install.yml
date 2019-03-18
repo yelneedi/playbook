@@ -1,0 +1,19 @@
+---
+- hosts: webserver
+  sudo: yes
+  connection: ssh
+  gather_facts: yes
+  remote_user: ansible
+  vars:
+   http_port: 80
+   max_client: 200
+  tasks:
+   - name: install appache
+     action: yum name=httpd state=installed
+   - name: copy the file to stagign server
+     action: copy src=/tmp/copy.txt dest=/tmp/copy.txt
+     notify: restart httpd
+  handlers:
+   - name: restart httpd
+     action: service namee=httpd state=restarted
+
