@@ -1,0 +1,12 @@
+---
+- hosts: webserver
+  sudo: yes
+  connection: ssh
+  gather_facts: yes
+  vars_prompt:
+   - name: pkg_name
+     prompt: which package want to install
+     default: telnet
+  tasks:
+    - name: install {{ pkg_name }}
+      action: yum name={{ pkg_name }} state=latest

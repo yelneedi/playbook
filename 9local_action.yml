@@ -1,0 +1,8 @@
+--- # install local action
+ - hosts: 127.0.0.1
+   sudo: yes
+   connection: local
+   gather_facts: no
+   tasks:
+    - name: install telnet pacakge
+      yum: name=telnet state=present

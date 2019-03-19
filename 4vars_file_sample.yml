@@ -1,0 +1,10 @@
+---
+- hosts: webserver
+  sudo: yes
+  connection: ssh
+  gather_facts: yes
+  vars_files:
+   - conf/software.yml
+  tasks:
+    - name: install {{ pkg_name }}
+      action: yum name={{ pkg_name }} state=latest

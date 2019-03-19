@@ -1,0 +1,11 @@
+--- # test async
+- hosts: all
+  sudo: yes
+  connection: ssh
+  gather_facts: yes
+  tasks:
+   - name: simulate long running op, allow to run for 45 sec, fire and forget
+     command: /usr/bin/date
+     async: 45
+     poll: 0
+

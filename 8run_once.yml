@@ -1,0 +1,10 @@
+--- # run once yml, it will run only one node even though all specify all nodes
+ - hosts: all
+   sudo: yes
+   gather_facts: no
+   tasks:
+     - name: check uptime
+       raw: /usr/bin/uptime >> /tmp/uptime.txt
+     - name: check files in /var
+       raw: ls -lttr /var >> /tmp/var.txt
+       run_once: true

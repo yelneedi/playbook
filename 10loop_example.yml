@@ -1,0 +1,11 @@
+---
+- hosts: webserver
+  sudo: yes
+  gather_facts: yes
+  remote_user: ansible
+  tasks:
+   - name: create test users
+     action: user name={{ item }} state=present
+     with_items:
+       - test1
+       - test2
