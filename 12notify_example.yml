@@ -1,0 +1,15 @@
+---
+- hosts: webserver
+  sudo: yes
+  connection: ssh
+  gather_facts: yes
+  tasks:
+   - name: install web server
+     action: yum name=httpd state=latest
+   - name: start serveice
+     action: service name=httpd state=started
+     register: results
+     until: results.stdout.find("active (running)") != -1
+     retries: 5
+     delay: 5
+   - debug: var=results
