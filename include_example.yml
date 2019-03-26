@@ -1,0 +1,5 @@
+---
+    - name: check the systrem date
+      action: command /usr/bin/date
+      register: results
+    - debug: var=results

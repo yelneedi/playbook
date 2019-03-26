@@ -1,0 +1,12 @@
+---
+- hosts: webserver
+  sudo: yes
+  connection: ssh
+  gather_facts: yes
+  remote_user: ansible
+  tasks:
+    - include_tasks: include_example.yml
+    - name: check the systrem date latest
+      action: command /usr/bin/date
+      register: newoutput
+    - debug: var=newoutput

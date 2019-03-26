@@ -1,0 +1,17 @@
+---
+- hosts: webserver
+  sudo: yes
+  connection: ssh
+  gather_facts: true
+  remote_user: ansible
+  vars:
+    version: 10.2
+  vars_prompt:
+    - name: pkg_name
+      prompt: which package do you want install
+      default: telnet
+      private: no
+  tasks:
+    - name: install pkg
+      action: yum name={{ pkg_name }} state=present
+#
