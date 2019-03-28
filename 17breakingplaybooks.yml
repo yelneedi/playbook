@@ -1,0 +1,12 @@
+---
+- hosts: webserver
+  sudo: yes
+  connection: ssh
+  gather_facts: yes
+  remote_user: ansible
+  tasks:
+   - include: pkg/install_httpd.yml
+   - include: pkg/verify_pkg.yml
+  handlers:
+   - include: pkg/notify.yml
+    

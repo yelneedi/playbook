@@ -1,0 +1,12 @@
+---
+- hosts: webserver
+  sudo: yes
+  connection: ssh
+  gather_facts: yes
+  remote_user: ansible
+  tasks:
+    - name: verify installed package
+      action: command /bin/false
+      ignore_errors: yes
+    - name: install package
+      action: yum name=httpd state=latest

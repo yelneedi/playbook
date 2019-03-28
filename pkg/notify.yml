@@ -1,0 +1,5 @@
+---
+ - name: restart lister after restart
+   action: service name=httpd state=restarted
+   listen:
+     - restart listener

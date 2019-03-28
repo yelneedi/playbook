@@ -1,0 +1,5 @@
+---
+ - name: install apache pkg
+   action: yum name=httpd state=latest
+   notify:
+     - restart listener

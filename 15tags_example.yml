@@ -1,0 +1,17 @@
+---
+- hosts: all
+  sudo: yes
+  connection: ssh
+  gather_facts: yes
+  remote_user: ansible
+  tasks:
+    - name: install package
+      action: yum name=httpd state=present
+      tags:
+        - package
+    - name: verify installed pakcages
+      action: raw yum list installed
+      register: results
+      tags:
+        - verify
+    - debug: var=results
