@@ -1,0 +1,12 @@
+---
+ - hosts: localhost
+   remote_user: ansible
+   become_method: yes
+   connection: ssh
+   gather_facts: no
+   tasks:
+     - name: create new key for aws
+       ec2_key: 
+         name: MytestKey 
+         state: absent
+         

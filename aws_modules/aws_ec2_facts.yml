@@ -1,0 +1,11 @@
+---
+- hosts: aws
+  remote_user: ec2-user
+  become_method: sudo
+  connection: ssh
+  gather_facts: yes
+  tasks:
+    - name: check ansible ec2 facts
+      action: ec2_facts
+    - name: display the ec2 instance type
+      debug: msg='{{ansible_ec2_instance_type}}'

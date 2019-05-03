@@ -1,0 +1,12 @@
+---
+- hosts: aws
+  become_method: ssh
+  sudo: yes
+  gather_facts: ssh
+  remote_user: ec2-user
+  tasks:
+    - name: execute shell command to list directories
+      shell: ls -lttr ~
+      register: results
+    - name: registe results
+      debug: var=results

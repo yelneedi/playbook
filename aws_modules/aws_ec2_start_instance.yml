@@ -1,0 +1,13 @@
+--- # start the ec2 instance
+ - hosts: localhost
+   gather_facts: false
+   connection: local
+   tasks:
+     - name: start ec2 instance
+       ec2: 
+         instance_ids: 
+           - i-02c816aa4335063f7 
+           - i-084dde0a7a60481bd
+         state: stopped
+         vpc_subnet_id: subnet-30a7b457
+         wait: True
