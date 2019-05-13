@@ -1,0 +1,22 @@
+---
+- hosts: localhost
+  connection: local
+  become: yes
+  gather_facts: no
+  vars_files: 
+   - /home/ansible/key.yml
+  tasks:
+   - name: create ec2 instance
+     ec2:
+      key_name: jenkins
+      region: "{{ aws_region }}"
+      aws_access_key: "{{ aws_key }}"
+      aws_secret_key: "{{ aws_secret }}"
+      group: ansible
+      instance_type: t2.micro
+      image: ami-0b419c3a4b01d1859 
+      wait: true
+      assign_public_ip: yes
+      vpc_subnet_id: subnet-30a7b457
+      count: 2
+     register: ec2

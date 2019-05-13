@@ -1,0 +1,24 @@
+--- # create ami instance
+- hosts: localhost
+  connection: local
+  become: yes
+  gather_facts: no
+  vars_files: 
+   - /home/ansible/key.yml
+  tasks:
+   - name: create ami instance
+     ec2_ami:
+      region: "{{ aws_region }}"
+      aws_access_key: "{{ aws_key }}"
+      aws_secret_key: "{{ aws_secret }}"
+      instance_id: i-0bf3dd2dcf3519a4c
+      name: myimage2
+      tags:
+       Name: test
+       Service: database
+      device_mapping:
+       - device_name: /dev/sdb1
+         volume_size: 100
+         delete_on_termination: true
+         volume_type: gp2
+     register: instance

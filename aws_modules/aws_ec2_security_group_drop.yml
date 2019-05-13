@@ -1,0 +1,16 @@
+--- # it is for  droping security group
+- hosts: localhost
+  connection: local
+  become: yes
+  gather_facts: yes
+  remote_user: ansible
+  vars_files:
+    - /home/ansible/key.yml
+  tasks:
+    - name: create new security group.
+      ec2_group:
+       aws_access_key: "{{ aws_key }}"
+       aws_secret_key: "{{ aws_secret }}"
+       region: "{{ aws_region }}"
+       name: TestSecurityGroup
+       state: absent

@@ -1,0 +1,21 @@
+---
+- hosts: localhost
+  connection: local
+  remote_user: ansible
+  gather_facts: no
+  become: yes
+  vars_files:
+    - /home/ansible/key.yml
+  tasks:
+   - name: find ami
+     ec2_ami_find:
+      region: "{{ aws_region }}"
+      aws_access_key: "{{ aws_key }}"
+      aws_secret_key: "{{ aws_secret }}"
+      owner: self
+      name: myimage2
+      no_result_action: fail
+     register: ami_find
+   - debug: msg={{ ami_find.results[0].ami_id }}
+   - debug: msg={{ ami_find.results[0].name }}
+

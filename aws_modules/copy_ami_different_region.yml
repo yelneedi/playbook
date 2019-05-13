@@ -1,0 +1,17 @@
+---
+ - hosts: localhost
+   connection: local
+   become: yes
+   gather_facts: no
+   remote_user: ansible
+   vars_files:
+     - /home/ansible/key.yml
+   tasks:
+     - name: copy ami to ap-southeast-2
+       ec2_ami_copy:
+        region: ap-southeast-2
+        source_image_id: ami-02ab6ff8eb03d4f9d
+        source_region: "{{ aws_region }}"
+        aws_access_key: "{{ aws_key }}"
+        aws_secret_key: "{{ aws_secret }}"
+        

@@ -3,10 +3,11 @@
    gather_facts: false
    connection: local
    tasks:
-     - name: start ec2 instance
+     - name: terminate ec2 instance
        ec2: 
          instance_ids: 
-           - i-02c816aa4335063f7 
-         state: stopped
+          - i-056b156c7ed27094f
+          - i-0f755f1083c957ab9
+         state: absent
          vpc_subnet_id: subnet-30a7b457
          wait: True

@@ -1,0 +1,16 @@
+--- # create ami instance
+- hosts: localhost
+  connection: local
+  become: yes
+  gather_facts: no
+  vars_files: 
+   - /home/ansible/key.yml
+  tasks:
+   - name: create ami instance
+     ec2_ami:
+      region: "{{ aws_region }}"
+      aws_access_key: "{{ aws_key }}"
+      aws_secret_key: "{{ aws_secret }}"
+      image_id: ami-0b4a2d3871b5c40f4
+      delete_snapshot: False
+      state: absent

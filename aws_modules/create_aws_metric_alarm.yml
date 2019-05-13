@@ -1,0 +1,26 @@
+--- # createing ec2 metric alarm
+- hosts: localhost
+  connection: local
+  become: yes
+  gather_facts: yes
+  remote_user: ansible
+  vars_files:
+    - /home/ansible/key.yml
+  tasks:
+    - name: creating new metric alert for cpu more than 25 % consistnely more than 25 minutes
+      ec2_metric_alarm:
+       aws_access_key: "{{ aws_key }}"
+       aws_secret_key: "{{ aws_secret }}"
+       region: "{{ aws_region }}"
+       name: "cpu-high"
+       state: present
+       metric: "CPUUtilization"
+       namespace: "AWS/EC2"
+       statistic: Average
+       comparison: ">"
+       threshold: 50.0
+       period: 300
+       evaluation_periods: 6
+       unit: "Percent"
+       description: "This alarm will run more than 50% avg 30 minutes"
+       dimensions: {'InstanceId': 'i-0bf3dd2dcf3519a4c'}

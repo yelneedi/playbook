@@ -1,0 +1,29 @@
+--- # it is for creating new security group.
+- hosts: localhost
+  connection: local
+  become: yes
+  gather_facts: yes
+  remote_user: ansible
+  vars_files:
+    - /home/ansible/key.yml
+  tasks:
+    - name: create new security group.
+      ec2_group:
+       aws_access_key: "{{ aws_key }}"
+       aws_secret_key: "{{ aws_secret }}"
+       region: "{{ aws_region }}"
+       name: TestSecurityGroup
+       description: "testing security group"
+       vpc_id: vpc-8ae7c9ed
+       rules:
+        - proto: tcp
+          ports:
+           - 80
+          cidr_ip: 0.0.0.0/0
+          rule_desc: allow all on prot 80
+       rules_egress:
+        - proto: tcp
+          ports:
+           - 80
+          cidr_ip: 0.0.0.0/0
+          rule_desc: teting out bond
