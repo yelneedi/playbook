@@ -1,0 +1,18 @@
+--- # tag resources like instance,ami, volumnes ,sanpshots, network interfaces
+- hosts: localhost
+  connection: local
+  remote_user: ansible
+  gather_facts: no
+  become: yes
+  vars_files:
+   - /home/ansible/key.yml
+  tasks:
+   - name: tag resources like instance,ami, volumnes ,sanpshots, network interfaces.
+     ec2_tag:
+      aws_access_key: "{{ aws_key }}"
+      aws_secret_key: "{{ aws_secret }}"
+      region: "{{ aws_region }}"
+      resource: vpc-8ae7c9ed
+      tags:
+       Name: Prepod
+       env: TempProject

@@ -1,0 +1,18 @@
+--- # snapshot creation for root volume
+- hosts: localhost
+  connection: local
+  remote_user: ansible
+  gather_facts: no
+  become: yes
+  vars_files:
+   - /home/ansible/key.yml
+  tasks:
+   - name: creating snap shot for root volume.
+     ec2_snapshot:
+      aws_access_key: "{{ aws_key }}"
+      aws_secret_key: "{{ aws_secret }}"
+      region: "{{ aws_region }}"
+      instance_id: i-0bf3dd2dcf3519a4c
+      description: root volume adhoc backup for testing.
+      device_name: /dev/sda1
+      wait: no

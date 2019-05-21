@@ -1,0 +1,21 @@
+--- # create new vpc with cidr block 10.10.0.0/16
+- hosts: localhost
+  connection: local
+  remote_user: ansible
+  gather_facts: no
+  become: yes
+  vars_files:
+   - /home/ansible/key.yml
+  tasks:
+   - name: create new vpc with cidr block 10.10.0.0/16
+     ec2_vpc_net:
+      aws_access_key: "{{ aws_key }}"
+      aws_secret_key: "{{ aws_secret }}"
+      region: "{{ aws_region }}"
+      name: production_vpc
+      cidr_block: 10.10.0.0/16
+      tags:
+       project: govtech
+       reason: testing custome
+     register: results
+   - debug: var=results

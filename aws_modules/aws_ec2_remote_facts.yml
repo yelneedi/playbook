@@ -1,0 +1,17 @@
+--- # get the details about instances
+- hosts: localhost
+  connection: local
+  become: yes
+  remote_user: ansible
+  gather_facts: no
+  vars_files:
+    - /home/ansible/key.yml
+  tasks:
+   - name: collect instance detals
+     ec2_remote_facts:
+      aws_access_key: "{{ aws_key }}"
+      aws_secret_key: "{{ aws_secret }}"
+      region: "{{ aws_region }}"
+     register: remote_facts
+   - debug: var=remote_facts
+     

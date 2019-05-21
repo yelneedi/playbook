@@ -1,0 +1,23 @@
+--- # create sample group and assing to users
+- hosts: localhost
+  connection: local
+  remote_user: ansible
+  gather_facts: no
+  become: yes
+  vars_files:
+   - /home/ansible/key.yml
+  tasks:
+   - name: create sample group and assing to users
+     iam:
+      aws_access_key: "{{ aws_key }}"
+      aws_secret_key: "{{ aws_secret }}"
+      region: "{{ aws_region }}"
+      iam_type: group
+      name: "{{ item }}"
+      state: present
+     loop:
+      - dbagroup
+      - appgroup  
+     register: results
+   - name: display deatils
+     debug: var=results

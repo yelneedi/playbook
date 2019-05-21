@@ -1,0 +1,17 @@
+--- # gather facts about all vpc's
+- hosts: localhost
+  connection: local
+  remote_user: ansible
+  gather_facts: no
+  become: yes
+  vars_files:
+   - /home/ansible/key.yml
+  tasks:
+   - name: gather facts about all vpc's
+     ec2_vpc_net_facts:
+      aws_access_key: "{{ aws_key }}"
+      aws_secret_key: "{{ aws_secret }}"
+      region: "{{ aws_region }}"
+     register: results
+   - name: display info for all vpcs 
+     debug: var=results

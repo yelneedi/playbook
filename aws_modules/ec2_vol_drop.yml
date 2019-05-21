@@ -1,0 +1,16 @@
+--- # drop unsued voluemes
+- hosts: localhost
+  connection: local
+  remote_user: ansible
+  gather_facts: no
+  become: yes
+  vars_files:
+   - /home/ansible/key.yml
+  tasks:
+   - name: drop unsued volumed
+     ec2_vol:
+      aws_access_key: "{{ aws_key }}"
+      aws_secret_key: "{{ aws_secret }}"
+      region: "{{ aws_region }}"
+      id: vol-0dd03ba30b61b5c4a
+      state: absent 
